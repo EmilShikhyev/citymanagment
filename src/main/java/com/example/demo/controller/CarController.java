@@ -1,24 +1,20 @@
 package com.example.demo.controller;
-
+import com.example.demo.maper.CarMapper;
 import com.example.demo.dto.CarDTO;
-import com.example.demo.maper.CarMaper;
 import com.example.demo.model.Car;
 import com.example.demo.service.CarService;
 import jakarta.websocket.server.PathParam;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RequestMapping("/api/car")
 @RestController
+@RequiredArgsConstructor
 public class CarController {
     private final CarService carService;
-    private final CarMaper carMaper;
-
-    public CarController(CarService carService, CarMaper carMaper) {
-        this.carService = carService;
-        this.carMaper = carMaper;
-    }
+    private final CarMapper carMapper;
 
     @PostMapping("/create")
     public Car create(@RequestBody Car car){
@@ -32,7 +28,7 @@ public class CarController {
 
     @GetMapping("/{id}")
     public CarDTO getById(@PathVariable(name = "id") Long id){
-        return carMaper.map(carService.getById(id));
+        return carMapper.toDTO(carService.getById(id));
     }
 
     @DeleteMapping("/delete")

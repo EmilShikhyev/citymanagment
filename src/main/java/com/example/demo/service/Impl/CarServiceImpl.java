@@ -26,7 +26,7 @@ public class CarServiceImpl implements CarService {
     }
 
     public Car getById(Long id){
-        return carRepository.findById(id).orElseThrow();
+        return carRepository.findById(id).orElseThrow(() -> new RuntimeException("null"));
     }
 
     public List<Car> getAll() {
@@ -35,6 +35,6 @@ public class CarServiceImpl implements CarService {
 
     public void deleteById(Long id){
          carRepository.deleteById(id);
-    }
+    } // Удалить запись с внешним ключем - оригинал
 
 }

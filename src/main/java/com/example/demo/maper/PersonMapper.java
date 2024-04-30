@@ -6,5 +6,6 @@ import org.mapstruct.Mapper;
 
 @Mapper
 public interface PersonMapper {
-    PersonDTO map(Person person);
+    PersonDTO toDTO(Person person);
+    Person toEntity(PersonDTO dto);
 }

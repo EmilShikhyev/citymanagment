@@ -17,6 +17,6 @@ public class Person {
     private long id;
     @Column
     private String name;
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "person", cascade = CascadeType.MERGE)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "person", cascade = {CascadeType.MERGE})
     private Set<Car> cars;
 }
