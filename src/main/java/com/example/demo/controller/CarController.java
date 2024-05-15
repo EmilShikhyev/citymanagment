@@ -17,13 +17,13 @@ public class CarController {
     private final CarMapper carMapper;
 
     @PostMapping("/create")
-    public Car create(@RequestBody Car car){
-        return carService.createCar(car);
+    public CarDTO create(@RequestBody CarDTO carDto){
+        return carMapper.toDTO(carService.createCar(carMapper.toEntity(carDto)));
     }
 
     @GetMapping("/all")
-    public List<Car> getAll(){
-        return carService.getAll();
+    public List<CarDTO> getAll(){
+        return carMapper.listToDto(carService.getAll());
     }
 
     @GetMapping("/{id}")

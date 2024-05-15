@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.ToString;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -19,4 +20,6 @@ public class Person {
     private String name;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "person", cascade = {CascadeType.MERGE})
     private Set<Car> cars;
+    @ManyToMany(fetch = FetchType.LAZY,mappedBy = "persons",cascade = CascadeType.MERGE)
+    private List<House> houses;
 }
