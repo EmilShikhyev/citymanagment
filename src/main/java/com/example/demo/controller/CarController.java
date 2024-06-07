@@ -1,4 +1,5 @@
 package com.example.demo.controller;
+import com.example.demo.dto.CreateCarDTO;
 import com.example.demo.maper.CarMapper;
 import com.example.demo.dto.CarDTO;
 import com.example.demo.model.Car;
@@ -17,8 +18,8 @@ public class CarController {
     private final CarMapper carMapper;
 
     @PostMapping("/create")
-    public CarDTO create(@RequestBody CarDTO carDto){
-        return carMapper.toDTO(carService.createCar(carMapper.toEntity(carDto)));
+    public CarDTO create(@RequestBody CreateCarDTO createCarDTO) {
+        return carMapper.toDTO(carService.createCar(carMapper.map(createCarDTO)));
     }
 
     @GetMapping("/all")
@@ -33,7 +34,7 @@ public class CarController {
 
     @DeleteMapping("/delete")
     public void delete(@PathParam("id")Long id){
-        carService.deleteById(id);
+        carService.deleteById(id); //dto?
     }
 
 

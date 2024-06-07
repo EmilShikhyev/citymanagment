@@ -1,5 +1,6 @@
 package com.example.demo.service.Impl;
 
+import com.example.demo.exeption.HouseNotFoundExeption;
 import com.example.demo.model.Car;
 import com.example.demo.model.House;
 import com.example.demo.model.Person;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -19,8 +21,6 @@ public class HouseServiceImpl implements HouseService {
     private final PersonService personService;
     @Transactional
     public House createHouse(House house){
-//        Person person = personService.getById(house.getPersons().getId());
-//        person.getHouses().add(house);
         return houseRepository.save(house);
     }
 
@@ -36,4 +36,24 @@ public class HouseServiceImpl implements HouseService {
         houseRepository.deleteById(id);
     }
 
+    @Override
+    public List<Person> getAllPersonsByStreet(String street) {
+        street = "%" + street + "%";
+        List<House> houseList = houseRepository.getHousesByStreet(street);
+        return houseList.stream().
+                flatMap(house -> house.getPersons().stream())
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional
+    public House addPerson(Long houseId, Long personId) {
+        Person person = personService.getById(personId);
+        House house = houseRepository.findById(houseId).orElseThrow(() -> new HouseNotFoundExeption(houseId)); //TODO : Выбрасывать исключение если нет дома и перехватывать
+        house.getPersons().add(person);
+        person.getHouses().add(house);
+        houseRepository.save(house);
+        personService.update(person);
+        return house;
+    }
 }

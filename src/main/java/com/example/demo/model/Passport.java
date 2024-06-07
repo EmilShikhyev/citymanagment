@@ -5,15 +5,13 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "car")
-public class Car {
+public class Passport {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column
-    private String mark;
-    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-    @JoinColumn(name = "person_id")
+    private Long number;
+
+    @OneToOne(mappedBy = "passport")
     private Person person;
 
 }

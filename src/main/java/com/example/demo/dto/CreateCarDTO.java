@@ -1,11 +1,11 @@
 package com.example.demo.dto;
 
 import lombok.Data;
+import org.mapstruct.Mapping;
 
 @Data
-public class CarDTO {
-    Long id;
-    String mark;
+public class CreateCarDTO {
     String model;
-    Long personId;
+    String mark;
+
 }

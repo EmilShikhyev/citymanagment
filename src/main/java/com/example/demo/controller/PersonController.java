@@ -1,5 +1,9 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.CarDTO;
+import com.example.demo.dto.PersonDTO;
+import com.example.demo.maper.CarMapper;
+import com.example.demo.maper.PersonMapper;
 import com.example.demo.model.Person;
 import com.example.demo.service.Impl.PersonServicesImpl;
 import jakarta.websocket.server.PathParam;
@@ -12,23 +16,34 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PersonController {
     private final PersonServicesImpl personServices;
+    private final PersonMapper personMapper;
+    private final CarMapper carMapper;
     @PostMapping("/create")
-    public Person create(@RequestBody Person person){
-        return personServices.createPerson(person);
+    public PersonDTO create(@RequestBody PersonDTO personDTO){
+        return personMapper.toDTO(personServices.createPerson(personMapper.toEntity(personDTO)));
     }
 
     @GetMapping("/all")
-    public List<Person> getAll(){
-        return personServices.getAll();
+    public List<PersonDTO> getAll(){
+        return personMapper.listToDto(personServices.getAll());
     }
 
     @GetMapping("/{id}")
-    public Person getById(@PathVariable(name = "id") Long id){
-        return personServices.getById(id);
+    public PersonDTO getById(@PathVariable(name = "id") Long id){
+        return personMapper.toDTO(personServices.getById(id));
     }
 
     @DeleteMapping("/delete")
     public void deleteById(@PathParam("id") Long id){
         personServices.deleteById(id);
+    }
+
+//    public PersonDTO update(@RequestBody){
+//
+//    }
+    @PutMapping("/addcar")
+    public PersonDTO addCar(@RequestBody CarDTO carDTO, @PathParam(value = "id") Long id){
+       var personAdd = personServices.addCar(carMapper.toEntity(carDTO),id);
+       return personMapper.toDTO(personAdd);
     }
 }
