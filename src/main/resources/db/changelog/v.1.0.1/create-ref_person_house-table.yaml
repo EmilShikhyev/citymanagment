@@ -1,0 +1,29 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-ref_person_house
+      author: Emil Shikhyev
+      changes:
+        - createTable:
+            tableName: ref_person_house
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: house_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: house_person_fk
+                    referencedTableName: house
+                    referencedColumnNames: id
+              - column:
+                  name: person_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: person_house_fk
+                    referencedTableName: person
+                    referencedColumnNames: id

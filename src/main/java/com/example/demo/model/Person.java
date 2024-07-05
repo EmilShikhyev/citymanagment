@@ -23,8 +23,7 @@ public class Person {
     private Set<Car> cars;
     @ManyToMany(mappedBy = "persons", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<House> houses;
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "passport_id",referencedColumnName = "id")
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL,mappedBy = "person")
     private Passport passport;
 
 

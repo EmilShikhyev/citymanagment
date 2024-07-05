@@ -14,7 +14,7 @@ public class House {
     private String address;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinTable(name = "ref_house_person",
+    @JoinTable(name = "ref_person_house",
     joinColumns = @JoinColumn(name = "person_id"),
     inverseJoinColumns = @JoinColumn(name = "house_id"))
     private List<Person> persons;

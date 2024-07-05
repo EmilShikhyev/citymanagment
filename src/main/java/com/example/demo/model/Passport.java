@@ -11,7 +11,8 @@ public class Passport {
     private Long id;
     private Long number;
 
-    @OneToOne(mappedBy = "passport")
+    @OneToOne
+    @JoinColumn(name = "person_id",referencedColumnName = "id")
     private Person person;
 
 }

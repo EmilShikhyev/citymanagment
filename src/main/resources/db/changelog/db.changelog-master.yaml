@@ -2,8 +2,8 @@ databaseChangeLog:
   - include:
       id: "1"
       author: "emix"
-      file: "db/changelog/v.1.0.0/create-table.xml"
+      file: db/changelog/v.1.0.0/create-table.xml
   - include:
       id: "2"
       author: "emix"
-      file: "db/changelog/v.1.0.0/create-tables-reference.sql"
+      file: db/changelog/v.1.0.0/create-tables-reference.sql

@@ -9,6 +9,6 @@ import java.util.Set;
 public class PersonDTO {
     Long id;
     String name;
-    Set<Car> carSet;
+    Set<Car> carSet; //carDTO + housesDTO
 
 }
