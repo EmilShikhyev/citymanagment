@@ -1,8 +1,10 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.CarDTO;
+import com.example.demo.dto.HouseDTO;
 import com.example.demo.dto.PersonDTO;
 import com.example.demo.maper.CarMapper;
+import com.example.demo.maper.HouseMapper;
 import com.example.demo.maper.PersonMapper;
 import com.example.demo.model.Person;
 import com.example.demo.service.Impl.PersonServicesImpl;
@@ -18,6 +20,7 @@ public class PersonController {
     private final PersonServicesImpl personServices;
     private final PersonMapper personMapper;
     private final CarMapper carMapper;
+    private final HouseMapper houseMapper;
     @PostMapping("/create")
     public PersonDTO create(@RequestBody PersonDTO personDTO){
         return personMapper.toDTO(personServices.createPerson(personMapper.toEntity(personDTO)));
@@ -46,4 +49,12 @@ public class PersonController {
        var personAdd = personServices.addCar(carMapper.toEntity(carDTO),id);
        return personMapper.toDTO(personAdd);
     }
+
+    @PutMapping("/addhouse")
+    public PersonDTO addHouse(@RequestBody HouseDTO houseDTO, @PathParam(value = "id") Long id) {
+        var personAdd = personServices.addHouse(houseMapper.toEntity(houseDTO), id);
+        return personMapper.toDTO(personAdd);
+    }
+
+
 }

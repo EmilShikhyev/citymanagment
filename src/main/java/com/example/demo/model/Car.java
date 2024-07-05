@@ -12,7 +12,7 @@ public class Car {
     private Long id;
     @Column
     private String mark;
-    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.MERGE)
     @JoinColumn(name = "person_id")
     private Person person;
 

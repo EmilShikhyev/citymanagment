@@ -16,16 +16,14 @@ import java.util.Set;
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     private String name;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "person", cascade = {CascadeType.MERGE})
     private Set<Car> cars;
-    @ManyToMany(fetch = FetchType.LAZY,mappedBy = "persons",cascade = CascadeType.MERGE)
+    @ManyToMany(mappedBy = "persons", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<House> houses;
-
-
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "passport_id",referencedColumnName = "id")
     private Passport passport;
 

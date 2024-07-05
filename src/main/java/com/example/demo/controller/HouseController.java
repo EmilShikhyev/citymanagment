@@ -48,4 +48,8 @@ public class HouseController {
     public List<PersonDTO> getAllPersonsByStreet(@PathParam("street") String street){
         return personMapper.listToDto(houseService.getAllPersonsByStreet(street));
     }
+    @PutMapping("/addperson")
+    public void addPersonbyId(@PathParam(value = "houseId") Long houseId, @PathParam(value = "personId") Long personId){
+        houseService.addPerson(houseId,personId);
+    }
 }

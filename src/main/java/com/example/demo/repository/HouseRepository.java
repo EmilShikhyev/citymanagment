@@ -10,6 +10,6 @@ import java.util.List;
 
 public interface HouseRepository extends JpaRepository<House,Long> {
 
-    @Query(value = "select House from House h where h.address ilike :street")
+    @Query(value = "select h from House h where h.address ilike :street")
     List<House> getHousesByStreet(@Param("street") String street);
 }

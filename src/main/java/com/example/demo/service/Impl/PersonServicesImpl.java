@@ -7,6 +7,7 @@ import com.example.demo.model.Passport;
 import com.example.demo.model.Person;
 import com.example.demo.repository.PersonRepository;
 import com.example.demo.service.CarService;
+import com.example.demo.service.HouseService;
 import com.example.demo.service.PassportService;
 import com.example.demo.service.PersonService;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +25,7 @@ public class PersonServicesImpl implements PersonService {
     private final PersonRepository personRepository;
     private final PassportService passportService;
     private final CarService carService;
+    private final HouseService houseService;
     @Transactional
     public Person createPerson(Person person) {
         Person savedPerson = personRepository.save(person);
@@ -40,7 +42,7 @@ public class PersonServicesImpl implements PersonService {
     }
     @Transactional
     public void deleteById(Long id) {
-        personRepository.deleteById(id);
+        personRepository.deleteById(id);// удалять паспорт
     }
 
     public Person update(Person person){
@@ -57,11 +59,11 @@ public class PersonServicesImpl implements PersonService {
     }
 
     @Transactional // house repo?
-    public void addHouse(House house, Long personId){
+    public Person addHouse(House house, Long personId){
         Person person = personRepository.findById(personId)
                 .orElseThrow(() -> new PersonNotFoudExeption(personId));
         person.getHouses().add(house);
-        personRepository.save(person);
+       return personRepository.save(person);
     }
 
     @Transactional

@@ -7,6 +7,9 @@ import com.example.demo.service.PassportService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -14,6 +17,7 @@ import java.util.concurrent.ThreadLocalRandom;
 @Service
 public class PassportServiceImpl implements PassportService {
     private final PassportRepository passportRepository;
+
 
 
     public Passport createPassport(Person person) {

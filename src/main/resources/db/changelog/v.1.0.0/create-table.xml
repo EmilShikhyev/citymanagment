@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+    <changeSet id="create-table-person" author="emix">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select count(*)
+                from information_schema.tables where table_schema = 'public'
+  and table_name = 'person';
+            </sqlCheck>
+        </preConditions>
+        <createTable tableName="person">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(64)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="create-table-car" author="emix">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select count(*)
+                from information_schema.tables where table_schema = 'public'
+  and table_name = 'car';
+            </sqlCheck>
+        </preConditions>
+        <createTable tableName="car">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="mark" type="varchar(64)"/>
+            <column name="person_id" type="int"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create-table-passport" author="emix">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select count(*)
+                from information_schema.tables where table_schema = 'public'
+  and table_name = 'passport';
+            </sqlCheck>
+        </preConditions>
+        <createTable tableName="passport">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="number" type="BIGINT"/>
+            <column name="person_id" type="int"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create-table-house" author="emix">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select count(*)
+                from information_schema.tables where table_schema = 'public'
+  and table_name = 'house';
+            </sqlCheck>
+        </preConditions>
+        <createTable tableName="house">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="address" type="varchar(64)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create-table-ref_person_house" author="emix">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                select count(*)
+                from information_schema.tables where table_schema = 'public'
+  and table_name = 'ref_person_house';
+            </sqlCheck>
+        </preConditions>
+        <createTable tableName="ref_person_house">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="house_id" type="int"/>
+            <column name="person_id" type="int"/>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

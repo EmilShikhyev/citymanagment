@@ -20,7 +20,7 @@ public interface PersonService {
 
     public void update(String name, Long id);
 
-    public void addHouse(House house, Long personId);
+    public Person addHouse(House house, Long personId);
 
     public Person addCar(Car car, Long personId);
 }
